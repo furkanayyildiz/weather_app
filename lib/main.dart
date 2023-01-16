@@ -46,6 +46,7 @@ class _MyAppState extends State<MyApp> {
             //Üst kısım
             Expanded(
               child: Container(
+                padding: EdgeInsets.only(bottom: 10),
                 alignment: Alignment.center,
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -90,7 +91,14 @@ class _MyAppState extends State<MyApp> {
                         fontWeight: FontWeight.w300,
                         fontStyle: FontStyle.italic,
                       ),
-                    )
+                    ),
+                    Text(
+                      days![0].datetime.toString(),
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ],
                 ),
               ),
