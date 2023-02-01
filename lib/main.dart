@@ -37,6 +37,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           title: Text("Weather app"),
@@ -51,54 +52,73 @@ class _MyAppState extends State<MyApp> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
-                      weatherModel.address.toString().toUpperCase(),
-                      style: TextStyle(
-                        fontSize: 40,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Text(
-                      days![0].temp.toString(),
-                      style: TextStyle(
-                        fontSize: 50,
-                        fontStyle: FontStyle.italic,
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(Icons.arrow_circle_up),
-                        Text(
-                          days![0].tempmax.toString(),
-                          style: TextStyle(fontSize: 20),
-                        ),
-                        SizedBox(
-                          width: 8,
-                        ),
-                        Icon(Icons.arrow_circle_down),
-                        Text(
-                          days![0].tempmin.toString(),
-                          style: TextStyle(fontSize: 20),
-                        ),
-                      ],
-                    ),
-                    Text(
-                      days![0].conditions.toString(),
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 25,
-                        fontWeight: FontWeight.w300,
-                        fontStyle: FontStyle.italic,
-                      ),
-                    ),
-                    Text(
-                      days![0].datetime.toString(),
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    weatherModel == null
+                        ? Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        : Text(
+                            weatherModel.address.toString().toUpperCase(),
+                            style: TextStyle(
+                              fontSize: 40,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                    days == null || days!.isEmpty
+                        ? Center(
+                            child: CircularProgressIndicator(),
+                          )
+                        : ListView.builder(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: 1,
+                            itemBuilder: (context, index) {
+                              return Column(
+                                children: [
+                                  Text(
+                                    days![index].temp.toString(),
+                                    style: TextStyle(
+                                      fontSize: 50,
+                                      fontStyle: FontStyle.italic,
+                                    ),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(Icons.arrow_circle_up),
+                                      Text(
+                                        days![index].tempmax.toString(),
+                                        style: TextStyle(fontSize: 20),
+                                      ),
+                                      SizedBox(
+                                        width: 8,
+                                      ),
+                                      Icon(Icons.arrow_circle_down),
+                                      Text(
+                                        days![index].tempmin.toString(),
+                                        style: TextStyle(fontSize: 20),
+                                      ),
+                                    ],
+                                  ),
+                                  Text(
+                                    days![index].conditions.toString(),
+                                    style: TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w300,
+                                      fontStyle: FontStyle.italic,
+                                    ),
+                                  ),
+                                  Text(
+                                    days![index].datetime.toString(),
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
+                          ),
                   ],
                 ),
               ),
@@ -107,20 +127,33 @@ class _MyAppState extends State<MyApp> {
               color: Colors.grey,
             ),
             //alt kısım
-            Expanded(
-              child: Column(
-                children: [
-                  weatherCard("Felt Tempature", days![0].feelslike.toString(),
-                      Icons.thermostat),
-                  weatherCard("Humadity", days![0].humidity.toString(),
-                      Icons.water_drop),
-                  weatherCard(
-                      "Sun-Rise", days![0].sunrise.toString(), Icons.sunny),
-                  weatherCard(
-                      "Sun-Set", days![0].sunset.toString(), Icons.sunny),
-                ],
-              ),
-            )
+            days == null || days!.isEmpty
+                ? Center(
+                    child: CircularProgressIndicator(),
+                  )
+                : ListView.builder(
+                    itemCount: 1,
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemBuilder: (context, index) {
+                      return Column(
+                        children: [
+                          weatherCard(
+                              "Felt Tempature",
+                              days![index].feelslike.toString(),
+                              Icons.thermostat),
+                          weatherCard(
+                              "Humadity",
+                              days![index].humidity.toString(),
+                              Icons.water_drop),
+                          weatherCard("Sun-Rise",
+                              days![index].sunrise.toString(), Icons.sunny),
+                          weatherCard("Sun-Set", days![index].sunset.toString(),
+                              Icons.sunny),
+                        ],
+                      );
+                    },
+                  )
           ]),
         ),
       ),
