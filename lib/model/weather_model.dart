@@ -27,12 +27,12 @@ class WeatherModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['resolvedAddress'] = this.resolvedAddress;
-    data['address'] = this.address;
-    data['timezone'] = this.timezone;
-    data['description'] = this.description;
-    if (this.days != null) {
-      data['days'] = this.days!.map((v) => v.toJson()).toList();
+    data['resolvedAddress'] = resolvedAddress;
+    data['address'] = address;
+    data['timezone'] = timezone;
+    data['description'] = description;
+    if (days != null) {
+      data['days'] = days!.map((v) => v.toJson()).toList();
     }
     return data;
   }
@@ -107,26 +107,26 @@ class Days {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['datetime'] = this.datetime;
-    data['datetimeEpoch'] = this.datetimeEpoch;
-    data['tempmax'] = this.tempmax;
-    data['tempmin'] = this.tempmin;
-    data['temp'] = this.temp;
-    data['feelslikemax'] = this.feelslikemax;
-    data['feelslikemin'] = this.feelslikemin;
-    data['feelslike'] = this.feelslike;
-    data['humidity'] = this.humidity;
-    data['snow'] = this.snow;
-    data['snowdepth'] = this.snowdepth;
-    data['windgust'] = this.windgust;
-    data['windspeed'] = this.windspeed;
-    data['winddir'] = this.winddir;
-    data['pressure'] = this.pressure;
-    data['sunrise'] = this.sunrise;
-    data['sunset'] = this.sunset;
-    data['conditions'] = this.conditions;
-    data['description'] = this.description;
-    data['icon'] = this.icon;
+    data['datetime'] = datetime;
+    data['datetimeEpoch'] = datetimeEpoch;
+    data['tempmax'] = tempmax;
+    data['tempmin'] = tempmin;
+    data['temp'] = temp;
+    data['feelslikemax'] = feelslikemax;
+    data['feelslikemin'] = feelslikemin;
+    data['feelslike'] = feelslike;
+    data['humidity'] = humidity;
+    data['snow'] = snow;
+    data['snowdepth'] = snowdepth;
+    data['windgust'] = windgust;
+    data['windspeed'] = windspeed;
+    data['winddir'] = winddir;
+    data['pressure'] = pressure;
+    data['sunrise'] = sunrise;
+    data['sunset'] = sunset;
+    data['conditions'] = conditions;
+    data['description'] = description;
+    data['icon'] = icon;
     return data;
   }
 }
